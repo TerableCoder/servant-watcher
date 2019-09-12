@@ -1,0 +1,13 @@
+{
+    "disableAutoUpdate": false,
+    "name": "ServantWatcher",
+    "author": "TerableCoder",
+    "description": "Detect Pet Exploit",
+    "version": "1",
+    "options": {
+        "settingsVersion": 1,
+        "settingsFile": "config.json",
+        "settingsMigrator": "settings_migrator.js"
+    },
+    "servers": ["https://raw.githubusercontent.com/TerableCoder/ServantWatcher/master/"]
+}

@@ -1,0 +1,75 @@
+{
+    "version": 1,
+    "data": {
+        "servers": [
+            {
+                "id": 4105,
+                "name": "Velika"
+            },
+            {
+                "id": 4107,
+                "name": "Kaitor"
+            },
+            {
+                "id": 30,
+                "name": "Sikander"
+            },
+            {
+                "id": 27,
+                "name": "Mystel"
+            },
+            {
+                "id": 26,
+                "name": "Killian"
+            },
+            {
+                "id": 32,
+                "name": "Amarun"
+            },
+            {
+                "id": 29,
+                "name": "Seren"
+            },
+            {
+                "id": 31,
+                "name": "Saleron"
+            },
+            {
+                "id": 28,
+                "name": "Yurian"
+            },
+            {
+                "id": 8,
+                "name": "카이아의 가호"
+            },
+            {
+                "id": 1,
+                "name": "아룬의 영광 - Karas"
+            },
+            {
+                "id": 2,
+                "name": "Zuras"
+            },
+            {
+                "id": 5071,
+                "name": "エリーヌ"
+            },
+            {
+                "id": 5072,
+                "name": "ルーキー"
+            },
+            {
+                "id": 2800,
+                "name": "提雅拉尼亞"
+            },
+            {
+                "id": 500,
+                "name": "Кайа"
+            },
+            {
+                "id": 501,
+                "name": "Велика"
+            }
+        ]
+    }
+}
