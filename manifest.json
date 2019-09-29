@@ -1,15 +1,23 @@
 {
 	"files": {
-		"index.js": "26f4bf6e2f0a521306a7b57fbbd9fa9e52d8a8085e17e97476dddeab4d0a612c",
-		"module.json": "cdb8a90fa54d035ab302e678a39857eb176482fcbd451afb6ca78911c32c3a59",
-		"README.md": "9ebd2b77f61dfa0bf871728a0f60f402d42a3733d1ef9a8f9793367e5db688d7",
-		"settings_migrator.js": "adf397ca15a8c00a46731a8dcc7e9123d1cc23f921d24f350a4f56be710efe5b",
-		"protocol/C_REQUEST_SPAWN_SERVANT.1.def": "bf34f8f2287f84ad6f67245f31da6934397d81f03db9c8878e4d3ead89a6c83e"
+		"config.json": {
+			"overwrite": false,
+			"hash": "d4c31817eaacccea0b42352bb4a843e1ac2816b43d73a8cd356ef169faf79d00"
+		},
+		"index.js": "1a7fbfb14945222a4ddb1bb39cddc1518e36869ba50527ccd030d19c853ab02e",
+		"module.json": "0196d56ee909159e927bdd08502c80cc07a7453c10ec849e06318d5935590620",
+		"README.MD": "14c2129b1d84cab791eeb3459f29a387e06e12ae9c24923cee4a33d5f22bcba6",
+		"settings_migrator.js": "fe9fca1922e63dd3ebcfff47ae79b8824c1dfcfc13c40b57fb093bcbb4a726dd"
 	},
 	"defs": {
-		"S_REQUEST_SPAWN_SERVANT": 3,
+		"S_LOGIN": 13,
+		"S_DESPAWN_USER": 3,
+		"S_SPAWN_USER": 14,
+		"S_ABNORMALITY_BEGIN": 3,
 		"S_REQUEST_DESPAWN_SERVANT": 1,
-		"C_VISIT_NEW_SECTION": 1,
-		"C_REQUEST_SPAWN_SERVANT": 1
+		"S_REQUEST_SPAWN_SERVANT": 1,
+		"C_LOAD_TOPO_FIN": "raw",
+		"S_RETURN_TO_LOBBY": "raw",
+		"S_EXIT": "raw"
 	}
 }
