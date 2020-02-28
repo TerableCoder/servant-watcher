@@ -44,7 +44,7 @@ sw get "name"
 
 sw search "serverId" "playerId"
 * Lists the: serverId, playerId, gameId, all known names, last seen dates of names, and all seen servants for the specified player
-* Example usage: `sw search 4107 184`
+* Example usage: `sw search 4107 131`
 
 ![sw search](images\swSearch.png)
 
