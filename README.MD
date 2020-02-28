@@ -3,11 +3,11 @@ Be automatically notified when someone cheats using https://github.com/Lambda11/
 
 Power Cheat: Receiving more power than your pet is capable of giving
 
-![Power Cheat](images\power.png)
+![Power Cheat](images/power.png)
 
 Ability Cheat: Using a pet ability that your pet doesn't know
 
-![Ability Cheat](images\ability.png)
+![Ability Cheat](images/ability.png)
 
 # How the Platform Works
 ```javascript
@@ -34,28 +34,28 @@ Spawning players and pets/servants sends their respective packets. Thus, allowin
 sw
 * Lists all commands
 
-![sw](images\sw.png)
+![sw](images/sw.png)
 
 sw get "name"
 * Lists the: serverId, playerId, and gameId of the player so that you can `sw search` for them
 * Example usage: `sw get name`
 
-![sw get](images\swGet.png)
+![sw get](images/swGet.png)
 
 sw search "serverId" "playerId"
 * Lists the: serverId, playerId, gameId, all known names, last seen dates of names, and all seen servants for the specified player
 * Example usage: `sw search 4107 131`
 
-![sw search](images\swSearch.png)
+![sw search](images/swSearch.png)
 
 sw spawned
 * Lists the: serverId, playerId, gameId, name,  date of last seen, and currently spawned servants for all spawned players
 * Example usage: `sw spawned`
 
-![sw spawned](images\swSpawned.png)
+![sw spawned](images/swSpawned.png)
 
 sw myserver
 * Lists the current serverId and server name
 * Example usage: `sw myserver`
 
-![sw myserver](images\swMyServer.png)
+![sw myserver](images/swMyServer.png)
