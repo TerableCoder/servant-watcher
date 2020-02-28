@@ -4,17 +4,17 @@
 			"overwrite": false,
 			"hash": "d4c31817eaacccea0b42352bb4a843e1ac2816b43d73a8cd356ef169faf79d00"
 		},
-		"index.js": "1a7fbfb14945222a4ddb1bb39cddc1518e36869ba50527ccd030d19c853ab02e",
+		"index.js": "4f178792cb7dac0a504ec88dfc7528908a1e3b73e23f1e3f73df7960ea4c16a2",
 		"module.json": "0196d56ee909159e927bdd08502c80cc07a7453c10ec849e06318d5935590620",
-		"README.MD": "14c2129b1d84cab791eeb3459f29a387e06e12ae9c24923cee4a33d5f22bcba6",
+		"README.MD": "9abed2eb49b0f22d40e03ebbfccda2004e686b8be8571e9fcfedd9d1df75883a",
 		"settings_migrator.js": "fe9fca1922e63dd3ebcfff47ae79b8824c1dfcfc13c40b57fb093bcbb4a726dd"
 	},
 	"defs": {
-		"S_LOGIN": 13,
+		"S_LOGIN": 14,
 		"S_DESPAWN_USER": 3,
-		"S_SPAWN_USER": 14,
+		"S_SPAWN_USER": 15,
 		"S_ABNORMALITY_BEGIN": 3,
-		"S_REQUEST_DESPAWN_SERVANT": 1,
+		"S_REQUEST_DESPAWN_SERVANT": 4,
 		"S_REQUEST_SPAWN_SERVANT": 1,
 		"C_LOAD_TOPO_FIN": "raw",
 		"S_RETURN_TO_LOBBY": "raw",

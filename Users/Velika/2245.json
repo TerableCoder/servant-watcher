@@ -1,0 +1,27 @@
+{
+  "serverId": 4105,
+  "playerId": 2245,
+  "guildName": "Tea",
+  "templateId": 10402,
+  "gameId": "432486301984969529",
+  "name": [
+    "Aphyxis"
+  ],
+  "date": [
+    "6/20/2019 9:47:7"
+  ],
+  "servants": [
+    {
+      "power": 19,
+      "gift": "Rapid Advancement 2",
+      "type": "Kuncun",
+      "color": "Blue",
+      "level": 10,
+      "fellowship": 40,
+      "ownerId": "432486301984969529",
+      "gameId": "4082349235775395",
+      "dbid": "32736",
+      "date": "6/20/2019 9:33:27"
+    }
+  ]
+}

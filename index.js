@@ -4,12 +4,12 @@ const mkdirp = require('mkdirp');
 const getDirName = require('path').dirname;
 
 String.prototype.clr = function (hexColor){ return `<font color='#${hexColor}'>${this}</font>` };
-// By KennyPHM
+// By Kenneth Choo
 module.exports = function ServantWatcher(mod){
     let spawnedPlayers = [];
     let spawnedPets = [];
 	
-	mod.command.add('sw', (cmd, arg1, arg2) => {
+	mod.command.add('sw', (cmd, arg1, arg2) => { // chat commands
 		if(cmd) cmd = cmd.toLowerCase();
 		if(arg1) arg1 = arg1.toLowerCase();
         switch(cmd){
@@ -36,7 +36,7 @@ module.exports = function ServantWatcher(mod){
 			return;
 		  case 'get':
 			for(let i = 0; i<spawnedPlayers.length; i++){
-				if(spawnedPlayers[i].name[0].toLowerCase() === arg1){ // TODO search all names maybe?
+				if(spawnedPlayers[i].name[0].toLowerCase() === arg1){
 					let knownServer = findServer(spawnedPlayers[i].serverId);
 					if(knownServer){
 						msg('Server: ' + knownServer + ' ~ ServerId: ' + spawnedPlayers[i].serverId + ' ~ PlayerId: ' + spawnedPlayers[i].playerId + ' ~ GameId: ' + spawnedPlayers[i].gameId + ' ~ Spawned Servants: ');
@@ -88,7 +88,8 @@ module.exports = function ServantWatcher(mod){
     });
 	
 	
-	mod.hook('S_LOGIN', 13, (event) => {
+
+	mod.hook('S_LOGIN', 14, (event) => { // wait to S_LOGIN packet version 13 packet to trigger
 		spawnedPlayers = [];
 		spawnedPets = [];
     });
@@ -106,10 +107,10 @@ module.exports = function ServantWatcher(mod){
         savePlayers();
     });
 	
-	mod.hook('S_DESPAWN_USER', 3, (event) => {
+	mod.hook('S_DESPAWN_USER', 3, (event) => { // player exits view
 		let finder = spawnedPlayers.find(g => g.gameId === event.gameId.toString());
 		let index = spawnedPlayers.indexOf(finder);
-		if(index > -1){ // update when removed
+		if(index > -1){ // update and remove
 			let foundServer = findServer(finder.serverId);
 			if(foundServer) updateUser(finder, foundServer);
 			else updateUser(finder, finder.serverId);
@@ -117,7 +118,7 @@ module.exports = function ServantWatcher(mod){
 		}
 	});
 	
-	mod.hook('S_SPAWN_USER', 14, (event) => { // from https://github.com/KennyPHM/GridironDeAnon
+	mod.hook('S_SPAWN_USER', 15, (event) => { // player enters view
 		let dataToWrite = {
             serverId: event.serverId,
             playerId: event.playerId,
@@ -126,11 +127,11 @@ module.exports = function ServantWatcher(mod){
             gameId: event.gameId.toString(),
 			name: [event.name],
 			date: [dateStringed()],
-			servants: [] // added
+			servants: []
 		};
 		let finder = spawnedPlayers.find(g => g.playerId === event.playerId);
 		let index = spawnedPlayers.indexOf(finder);
-		if(index > -1){ // remove if exists
+		if(index > -1){ // remove if exists, replace with updated information
 			let foundServer = findServer(finder.serverId);
 			if(foundServer) updateUser(finder, foundServer);
 			else updateUser(finder, finder.serverId);
@@ -140,7 +141,7 @@ module.exports = function ServantWatcher(mod){
 		finder = spawnedPlayers.find(g => g.playerId === event.playerId);
 		
 		let yourPets = spawnedPets.filter(g => g.ownerId === dataToWrite.gameId);
-		if(yourPets.length){
+		if(yourPets.length){ // display all pets
 			msg("Owner: " + event.name, '00AAFF');
 			msg("Guild: " + event.guildName, '00AAFF');
 			for(let pet of yourPets){ // should only be 1
@@ -155,7 +156,7 @@ module.exports = function ServantWatcher(mod){
     });
     
 	// 3-40 power = 13000-13037
-	/*giftedSkills id
+	/*giftedSkills id -> ability name & level
 0	Urgent Recovery 14000 14001 14002
 1	Emergency Service 14003 14004 14005
 2	Barrier 14006 14007 14008
@@ -166,9 +167,9 @@ module.exports = function ServantWatcher(mod){
 7	Critical Crafting 14021 14022 14023
 8	Backup Fisherman 14024 14025 14026
 9	Gathering Support 14027 14028 14029*/
-	mod.hook('S_ABNORMALITY_BEGIN', 3, (event) => {
-		if(!(event.id >= 13000 && event.id <= 13037) && !(event.id >= 14000 && event.id <= 14029)) return;
-		if(event.id >= 13000 && event.id <= 13037){ // power
+	mod.hook('S_ABNORMALITY_BEGIN', 3, (event) => { // a player received a buff
+		if(!(event.id >= 13000 && event.id <= 13037) && !(event.id >= 14000 && event.id <= 14029)) return; // buff isn't power nor ability
+		if(event.id >= 13000 && event.id <= 13037){ // power cheat
 			let finder = spawnedPets.find(g => g.ownerId === event.target.toString());
 			if(finder){ // target's pet is spawned
 				if(finder.power == (event.id - 12997)){ // legit player
@@ -186,7 +187,7 @@ module.exports = function ServantWatcher(mod){
 				msg('GameId: ' + finder2.gameId);
 				msg("Date: " + dateStringed());
 			}
-		} else{ // giftedSkills id
+		} else{ // ability cheat, giftedSkills id
 			let finder = spawnedPets.find(g => g.ownerId === event.target.toString());
 			if(finder){ // target's pet is spawned
 				let appliedGift = calculateGift(event.id - 13998);
@@ -208,22 +209,23 @@ module.exports = function ServantWatcher(mod){
 		}
 	});
 	
-	mod.hook('S_REQUEST_DESPAWN_SERVANT', 1, (event) => {
+	mod.hook('S_REQUEST_DESPAWN_SERVANT', 1, (event) => { // pet exits view
 		let finder = spawnedPets.find(g => g.gameId === event.gameId.toString());
 		let index = spawnedPets.indexOf(finder);
-		if(index > -1){
+		if(index > -1){ // remove pet
 			spawnedPets.splice(index, 1);
 		}
 	});
 	
-	/*id
-	marie 	1001 	1002 	1003
-	loo 	1004 	1005 	1006
-	kuncun 	1007 	1008 	1009
-	cocomin	1000/1010 1011 	1012*/
-	mod.hook('S_REQUEST_SPAWN_SERVANT', 1, (event) => {
-		if(mod.game.me.is(event.ownerId)) return; // mine
+	/*id -> pet name & color
+marie 	1001 	1002 	1003
+loo 	1004 	1005 	1006
+kuncun 	1007 	1008 	1009
+cocomin	1000/1010 1011 	1012*/
+	mod.hook('S_REQUEST_SPAWN_SERVANT', 4, (event) => { // pet enters view
+		if(mod.game.me.is(event.ownerId)) return; // script runner's pet
 		if(event.fellowship < 1) return; // not servant
+		// convert numbers to human readable text
 		let power = 0;
 		let color = "?";
 		if([1001, 1004, 1007, 1000, 1010].includes(event.id)){ // green servant
@@ -263,12 +265,12 @@ module.exports = function ServantWatcher(mod){
 		
 		let petFinder = spawnedPets.find(g => g.dbid === dataToWrite.dbid);
 		let pfIndex = spawnedPets.indexOf(petFinder);
-		if(pfIndex > -1){ // remove if exists
+		if(pfIndex > -1){ // remove if exists, replace with updated information
 			spawnedPets.splice(pfIndex, 1);
 		}
 		spawnedPets.push(dataToWrite);
 		
-		let finder = spawnedPlayers.find(g => g.gameId === dataToWrite.ownerId); // player is spawned
+		let finder = spawnedPlayers.find(g => g.gameId === dataToWrite.ownerId);
 		if(finder){ // player is spawned
 			msg("Owner: " + finder.name[finder.name.length-1], '00AAFF');
 			msg("Guild: " + finder.guildName, '00AAFF');
@@ -280,7 +282,7 @@ module.exports = function ServantWatcher(mod){
 			
 			let oldPet = finder.servants.find(g => g.dbid === dataToWrite.dbid);
 			let petIndex = finder.servants.indexOf(oldPet);
-			if(petIndex > -1){ // remove if exists
+			if(petIndex > -1){ // remove if exists, replace with updated information
 				finder.servants.splice(petIndex, 1);
 			}
 			finder.servants.push(dataToWrite);
@@ -289,6 +291,7 @@ module.exports = function ServantWatcher(mod){
 	
 	
 	function calculatePower(grade, fellowship){ // https://docs.google.com/spreadsheets/d/1vVjt-XMAsKaPDSNjWlRMNCXUQHlWUHp-QKnJb_NhIdw/edit#gid=0
+		// different amounts of fellowship lead to different math formulas
 		if(fellowship < 25){ // 1-24 fellowship
 			return (grade + Math.floor((fellowship-1) / 3));
 		} else if(fellowship < 45){ // 25-44 fellowship
@@ -308,7 +311,7 @@ module.exports = function ServantWatcher(mod){
 7	Critical Crafting 23 24 25
 8	Backup Fisherman 26 27 28
 9	Gathering Support 29 30 31*/
-	function calculateGift(id){
+	function calculateGift(id){ // convert ability to string
 		let giftTier = ((id-2) % 3)+1;
 		let giftType = Math.floor((id-2) / 3);
 		switch(giftType){
@@ -327,13 +330,13 @@ module.exports = function ServantWatcher(mod){
 		return (giftType + " " + giftTier.toString());
 	}
 	
-	function msg(message, color = false){
+	function msg(message, color = false){ // color the message and print it to the in-game chat
 		console.log(message);
 		if(color) message = message.clr(color);
 		mod.command.message(message);
 	}
 	
-	function savePlayers(){
+	function savePlayers(){ // save to JSON file
 		if(spawnedPlayers.length){
 			for(let player of spawnedPlayers){
 				let foundServer = findServer(player.serverId);
@@ -343,7 +346,7 @@ module.exports = function ServantWatcher(mod){
 		}
 	}
 	
-    function findUser(serverId, playerId){
+    function findUser(serverId, playerId){ // find JSON file
 		let foundServer = findServer(serverId);
 		
 		let finder = spawnedPlayers.find(g => g.playerId == playerId); // update file before reading
@@ -356,7 +359,7 @@ module.exports = function ServantWatcher(mod){
 		else readFromFile(serverId, playerId);
     }
 	
-	function findServer(serachServer){
+	function findServer(serachServer){ // server number -> server name
 		for(let server of mod.settings.servers){
             if(server.id == serachServer) return server.name;
 		}
@@ -372,7 +375,7 @@ module.exports = function ServantWatcher(mod){
 		}
 	}
 	
-	function updateUser(dataToWrite, server){
+	function updateUser(dataToWrite, server){ // update JSON file
 		let settingsPath = path.join(__dirname, 'Users', server, dataToWrite.playerId+'.json');
 		let data = getJsonData(settingsPath);
 		if(data){ // if existing player, add current name, gameId, and date 
@@ -391,7 +394,7 @@ module.exports = function ServantWatcher(mod){
 				for(let servant of dataToWrite.servants){
 					let oldPet = data.servants.find(g => g.dbid === servant.dbid);
 					let petIndex = data.servants.indexOf(oldPet);
-					if(petIndex > -1){ // remove if exists
+					if(petIndex > -1){ // remove if exists, replace with updated information
 						data.servants.splice(petIndex, 1);
 					}
 					data.servants.push(servant);

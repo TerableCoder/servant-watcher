@@ -1,0 +1,27 @@
+{
+  "serverId": 4107,
+  "playerId": 29,
+  "templateId": 11004,
+  "gameId": "72198331795445567",
+  "name": [
+    "Doom"
+  ],
+  "date": [
+    "8/12/2019 23:57:54"
+  ],
+  "guildName": "Treehouse",
+  "servants": [
+    {
+      "power": 19,
+      "gift": "Barrier 1",
+      "type": "Cocomin",
+      "color": "Blue",
+      "level": 10,
+      "fellowship": 40,
+      "ownerId": "216313519871306639",
+      "gameId": "4081387163226803",
+      "dbid": "126382",
+      "date": "7/21/2019 1:4:51"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "serverId": 4107,
+  "playerId": 131,
+  "guildName": "Synergy",
+  "templateId": 11001,
+  "gameId": "140737757529101",
+  "name": [
+    "Evoken"
+  ],
+  "date": [
+    "2/27/2020 22:6:14"
+  ],
+  "servants": [
+    {
+      "power": 17,
+      "gift": "Rapid Growth 2",
+      "type": "Marie",
+      "color": "Yellow",
+      "level": 10,
+      "fellowship": 34,
+      "ownerId": "216313519871302233",
+      "gameId": "4082349235036365",
+      "dbid": "197001",
+      "date": "7/20/2019 15:0:29"
+    },
+    {
+      "power": 19,
+      "gift": "Barrier 1",
+      "type": "Cocomin",
+      "color": "Yellow",
+      "level": 10,
+      "fellowship": 37,
+      "ownerId": "140737757524328",
+      "gameId": "4081387162927271",
+      "dbid": "220841",
+      "date": "8/23/2019 16:29:7"
+    },
+    {
+      "power": 18,
+      "gift": "Barrier 3",
+      "type": "Cocomin",
+      "color": "Yellow",
+      "level": 10,
+      "fellowship": 35,
+      "ownerId": "140737757529101",
+      "gameId": "4081387162805077",
+      "dbid": "230553",
+      "date": "2/27/2020 22:4:11"
+    }
+  ]
+}
