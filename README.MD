@@ -19,7 +19,7 @@ mod.hook('S_LOGIN', 14, (event) => {
 ```
 
 # How the Script Works
-Spawning players and pets/servants sends their respective packets. Thus, allowing me to access and store their data in that player's JSON file for later viewing. These packets are always followed by packet's specifying the player's buffs. So, I check the player's buff data against their pet's buff data. If there is a conflict, it means that player is cheating. So I display their information as seen in the screenshot above. Players can then this screenshot to https://support.enmasse.com/hc/en-us to report that player and get them banned for cheating.
+Spawning players and pets/servants sends their respective packets. Thus, allowing me to access and store their data in that player's JSON file for later viewing. These packets are always followed by packet's specifying the player's buffs. So, I check the player's buffs from pets against their pet's data. If there is a conflict, it means that player is cheating. So I display their information as seen in the screenshot above. Players can then take this screenshot to https://support.enmasse.com/hc/en-us to report that player and get them banned for cheating.
 
 # What Each File Does
 * config.json - Stores serverId to Name data
